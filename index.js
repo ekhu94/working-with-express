@@ -1,29 +1,16 @@
 const express = require("express");
+
+const adminRoutes = require("./routes/admin");
+const shopRoutes = require("./routes/shop");
 const app = express();
 
 app.use(express.urlencoded({ extended: false }));
 
-app.use((req, res, next) => {
-  console.log("In the first middleware");
-  next();
-});
+app.use(adminRoutes);
+app.use(shopRoutes);
 
-app.use("/add-product", (req, res) => {
-  res.send(
-    '<form method="POST" action="/product"><input type="text" name="title"><button type="submit">Add Product</button></form>'
-  );
-});
-
-app.post("/product", (req, res) => {
-  console.log(req.body);
-  res.redirect("/");
-});
-
-app.use("/", (req, res, next) => {
-  console.log("In the second middleware");
-  res.send(
-    '<h1>Welcome to my Express App</h1><a href="/add-product">New Product</a>'
-  );
+app.use((req, res) => {
+  res.send("<h1>404: Page Not Found</h1>");
 });
 
 app.listen(3000, () => {
