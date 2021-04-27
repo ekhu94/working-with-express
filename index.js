@@ -1,12 +1,14 @@
 const express = require("express");
+const path = require("path");
 
 const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
 const app = express();
 
+app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: false }));
 
-app.use(adminRoutes);
+app.use("/admin", adminRoutes);
 app.use(shopRoutes);
 
 app.use((req, res) => {

@@ -2,9 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/add-product", (req, res) => {
-  res.send(
-    '<form method="POST" action="/product"><input type="text" name="title"><button type="submit">Add Product</button></form>'
-  );
+  res.render("views/add-product");
 });
 
 router.post("/product", (req, res) => {
